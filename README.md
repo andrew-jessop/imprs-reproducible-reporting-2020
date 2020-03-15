@@ -1,2 +1,3 @@
-# imprs-reproducible-reporting-2020
-Slides for a talk on reproducibility in psychological research
+# Reproducible Reporting for Reproducible Research
+
+Slides for a talk delivered on 5th March 2020 as part of the *Key Practices for the Language Scientist* IMPRS course at the Max Planck Institute for Psycholinguistics in Nijmegen.

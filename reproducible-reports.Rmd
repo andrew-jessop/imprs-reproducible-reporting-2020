@@ -1,0 +1,231 @@
+---
+title: "Reproducible Reporting for Reproducible Research"
+author: "Andrew Jessop"
+output: 
+  revealjs::revealjs_presentation:
+    theme: white
+    highlight: kate
+    center: true
+    smart: true
+    incremental: false
+    transition: fade
+    css: style.css
+    self_contained: true
+    reveal_options:
+      slideNumber: false
+      controls: false
+      progress: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+library(ggplot2)
+library(ggsci)
+library(scales)
+library(tidyr)
+library(ggpubr)
+library(knitr)
+set.seed(200616065)
+trek <- c("#D43F3AFF", "#357EBDFF", "#5CB85CFF")
+
+format_plot <- function(p) {
+  p <- p + theme_bw()
+  p <- p + theme(plot.title = element_text(lineheight=.8, size=16, hjust = 0.5),
+               axis.title = element_text(face="bold", size = 14, color="black"),
+               axis.text = element_text(size = 12, color="black"),
+               axis.title.x = element_text(margin = margin(t = 10, r = 0, b = 0, l = 0)),
+               axis.title.y = element_text(margin = margin(t = 0, r = 0, b = 0, l = 10)),
+               panel.border = element_rect(colour = "black"),
+               panel.background = element_rect(fill = "white", colour = "white"),
+               plot.background = element_rect(fill = "white", colour = "white"),
+               legend.key.size = unit(1,"line"),
+               legend.title = element_text(face = "bold", size = 13),
+               legend.text = element_text(size = 13),
+               legend.position="right",
+               panel.grid.major = element_blank(),
+               panel.grid.minor = element_blank(),
+               axis.ticks = element_line(colour = "black"),
+               strip.text = element_text(size = 16, color="black"),
+               strip.background = element_rect(fill = "white", colour = "black"))
+  p <- p + scale_fill_manual(values=trek)
+  p <- p + scale_colour_manual(values=trek)
+  p <- p + scale_shape_manual(values=c(21, 22))
+  return(p)
+}
+
+```
+
+## Summary
+- What is reproducible reporting
+- Why does it matter?
+- How to do it?
+- Preparing a APA-style report in R Markdown
+
+
+## Reproducibility != Replicability
+
+- Replication = between-study reliability
+
+- Reproducibility = within-study reliability
+
+
+## Replication
+
+- **External verification**
+
+- A study is considered to be replicated when it is repeated with a new sample (subject/items) and the same basic findings are observed
+
+- Helps determine whether the results can be generalized
+
+
+## Reproducibility
+
+- **Internal verification**
+
+- A study is reproducible when another investigator can use the original **raw data** to arrive at the same results
+
+- Starts at the data analysis stage, and helps trace exactly how the raw data was used to obtain the results/conclusions in a final report/presentation
+
+- Typically involves using code
+
+
+## Reproducibility != Replicability
+
+- You could replicate a study without being able to reproduce the original findings
+
+- You could reproduce the original analyses but not independently replicate the results
+
+
+## {data-background="crisis.png"}
+
+
+## Why is Reproducibility important?
+
+- It is one of the few things that an investigator can guarantee about a study
+
+- Without it, we may never fully-understand a non-replication
+
+- Helps to find errors (verification)
+
+- Reduces the need for trust
+
+
+## {data-background="linus.jpg"}
+
+
+## What does reproducibility look like?
+
+- Any workflow that shows *everything* you've done to your raw data in a transparent and tracable way
+
+- Even small changes like moving/renaming files
+
+- Other researchers should be able to *see* what you have done without having to ask you!
+
+
+## Code is King
+
+- Reproducibility can be achieved when *everything* is done using code saved in scripts (R/Python/Julia/bash etc.)
+
+- These scripts provide a record of how the final product was created (including possible errors!)
+
+- Comments can be used to explain all important decisions
+
+
+## Ways of breaking reproducibility?
+
+- Copy-and-paste
+
+- Wrangling the raw data in spreadsheets (at the analysis stage)
+
+- Time-travelling -- making changes to the data without rerunning the analyses
+
+- Missing information (e.g., package versions, dependencies)
+
+- Ungeneralised code (e.g., hard-coded file paths)
+
+
+## How? 
+
+- *R* (*R Markdown*, Jupyter)
+
+- Python (Jupyter, PWeave)
+
+- Julia (Julia Markdown, Jupyter)
+
+- LaTeX (Overleaf)
+
+
+## What can I make reproducible?
+
+- Analysis notebooks (HTML, Jupyter)
+
+- Presentations (LaTeX Beamer, reveal.js)
+
+- Websites (e.g., Wordbank)
+
+- **Written reports of data/analyses (PDF, Word Documents)**
+
+
+## {data-background="example_report.png"} 
+
+
+
+## How to structure your project
+
+- A single project directory containing everything necessary for creating the analysis and report
+
+- This *entire* directory needs to be shared
+
+
+
+## Keep things organised! 
+
+- Make it easy for other investigators to navigate
+
+- Use separate subdirectories for major components (but be careful with renaming!)
+
+
+## Keep the analysis and the manuscript separate 
+
+- Complex analyses can take a while
+
+- R Markdown can create HTML notebooks as a complete record of your analysis (see example)
+
+- R Markdown can also make APA-style PDFs (see example) and Word Documents (see my GitHub)
+
+
+## Reproducible analyses
+
+- Tip -- ideally, try to use one well-organised script to avoid errors and time-travelling
+
+- Save the plots as high-resolution images using code!! (*ggsave*)
+
+- Export the results into a separate folder using code!! (*write.csv*)
+
+
+## Manuscripts in R Markdown
+
+- *ggplot2* package for plots
+
+- *xtable* package for tables
+
+- A *csl* file for APA references (from GitHub)
+
+- A custom *LaTeX* style sheet to apply APA-formatting (from OSF) 
+
+- *Zotero* to manage references, *Better BibTeX* to export your library as a bibtex file
+
+
+## Other packages
+
+- *papaja*: Prepare APA journal articles with R Markdown
+
+
+# Questions?
+
+- https://osf.io/mjv73/
+
+- https://github.com/andrew-jessop/
